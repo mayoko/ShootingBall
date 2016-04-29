@@ -130,7 +130,7 @@ for(int j=0;j<2;++j){
  H[j] = cv::findHomography( before,after[j]);
  cout <<(j==0?"H_wc=":"H_pc=")<<H[j] << std::endl;
  
- string filename=(string)("../ConsoleApplication10/ConsoleApplication10/Data/")+(j==0?"H_pc.txt":"H_pc.txt");
+ string filename=(string)("../../shootingBall/shootingBall/Data/")+(j==0?"H_pc.txt":"H_pc.txt");
  ofstream ofs( filename );    
 	ofs << H[j].at<double>(0,0) <<"\t"<< H[j].at<double>(0,1) <<"\t"<< H[j].at<double>(0,2) << std::endl;
 	ofs << H[j].at<double>(1,0) <<"\t"<< H[j].at<double>(1,1) <<"\t"<< H[j].at<double>(1,2) << std::endl;
@@ -139,10 +139,10 @@ for(int j=0;j<2;++j){
  if(j==1){
 	Mat H_pw(3,3,CV_64FC1);
 	Mat H_wc(3,3,CV_64FC1);
-	ifstream ifs("../ConsoleApplication10/ConsoleApplication10/Data/H_wc.txt");
+	ifstream ifs("../../shootingBall/shootingBall/Data/H_wc.txt");
 	for (int p = 0; p < 3; p++) for (int q = 0; q < 3; q++) ifs >> H_wc.at<double>(p,q);
 	H_pw = H[1] * H_wc.inv();
-    ofstream ofs1( "../ConsoleApplication10/ConsoleApplication10/Data/H_pw.txt"); 
+    ofstream ofs1( "../../shootingBall/shootingBall/Data/H_pw.txt"); 
 	ofs1 << H_pw.at<double>(0,0) <<"\t"<< H_pw.at<double>(0,1) <<"\t"<< H_pw.at<double>(0,2) << std::endl;
 	ofs1 << H_pw.at<double>(1,0) <<"\t"<< H_pw.at<double>(1,1) <<"\t"<< H_pw.at<double>(1,2) << std::endl;
 	ofs1 << H_pw.at<double>(2,0) <<"\t"<< H_pw.at<double>(2,1) <<"\t"<< H_pw.at<double>(2,2) << std::endl;

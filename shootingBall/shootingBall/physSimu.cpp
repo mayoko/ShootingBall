@@ -15,9 +15,9 @@ const Real damp = 5;
 // 矢印パネルでの加速項
 const Real cdAccel = 1000;
 // フィールドの幅
-const Real width = 782;
+const Real width = 950;
 // フィールドの高さ
-const Real height = 530;
+const Real height = 534;
 
 //ボールの半径
 const Real radius = 25;
@@ -110,7 +110,7 @@ void physSimu::simulate(const Field& field, Real t) {
 					v = reflection(v, l);
 					break;
 				}
-			}
+			}\
 		} else if (id == Field::Board::CHANGE_DIRECTION) {
 			if (contains(board.position, circle.p) == GEOMETRY_IN) {
 				// 矢印の向きに応じて速度を変化させる
@@ -149,7 +149,7 @@ void physSimu::simulate(const Field& field, Real t) {
 	// 任意のシミュレーションで行う処理:摩擦を受けて速度を微減させる
 	Real length = abs(v);
 	if (eq(length, 0)) return;
-	v *= 0.998;
+	//v *= 0.998;
 }
 
 void physSimu::shootBall(const Field& field, const Real& startV){
@@ -184,7 +184,7 @@ void physSimu::fallIntoHole(const Field& field){
 }
 void physSimu::fallIntoBlackHole(const Field& field){
 	ballIsMoving = false;
-	ballIsOver = true;
+	ballIsOver = false;
 }
 void physSimu::shootFromWhiteHole(const Field& field,const Real& startV){
 	cout << "shoot Ball" << endl;
@@ -197,14 +197,14 @@ void physSimu::shootFromWhiteHole(const Field& field,const Real& startV){
 			cout << "detect START" << endl;
 			//4頂点の重心が中心座標
 			Pt ballStartPos = (board.position[0] +board.position[1] +board.position[2] +board.position[3]) / 4.0;
-			Cir ball(ballStartPos,radius);
-			circle = ball;
-			//マーカの縦方向でのワールド座標系での単位ベクトルに初期速さをかけて初期速度に
-			//(4-board.dir)%4で常に左上になるらしい。そして順番は時計回りらしい。
-			v = (board.position[(3-board.dir)%4] - board.position[(3-board.dir+3)%4]) /  abs(board.position[0] - board.position[1]) * startV;
+			//Cir ball(ballStartPos,radius);
+			//circle = ball;
+			////マーカの縦方向でのワールド座標系での単位ベクトルに初期速さをかけて初期速度に
+			////(4-board.dir)%4で常に左上になるらしい。そして順番は時計回りらしい。
+			//v = (board.position[(3-board.dir)%4] - board.position[(3-board.dir+3)%4]) /  abs(board.position[0] - board.position[1]) * startV;
+			circle.p = ballStartPos;
 		}
 	}
-	t = 0;
 	ballIsMoving = true;
 	ballIsOver = false;
 	ballIsClear = false;

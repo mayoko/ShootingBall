@@ -43,8 +43,8 @@ int  count = 0;										// 処理フレーム数
 int startFlag = 0;                                  // スタートフラグ
 int winID[2];                                       // ウィンドウのID
 double gstartV;                                        // 初期速度
-const int width = 1280;
-const int height = 800;
+const int width = 1366;
+const int height = 768;
 Mat H_pc;
 double H_pw[9];
 bool Change = false;
@@ -83,24 +83,28 @@ ARParam cparam;										// カメラパラメータ
 #define MARK4_SIZE		60.0					// パターンの幅（40mm）
 //-----
 #define MARK5_MARK_ID	5						// マーカーID
-#define MARK5_PATT_NAME	"Data\\patt.hole"		// パターンファイル名
+#define MARK5_PATT_NAME	"Data\\patt.start"		// パターンファイル名
 #define MARK5_SIZE		60.0					// パターンの幅（40mm）
 //-----
 #define MARK6_MARK_ID	6						// マーカーID
-#define MARK6_PATT_NAME	"Data\\patt.hole2"		// パターンファイル名
+#define MARK6_PATT_NAME	"Data\\patt.hole"		// パターンファイル名
 #define MARK6_SIZE		60.0					// パターンの幅（40mm）
 //-----
 #define MARK7_MARK_ID	7						// マーカーID
-#define MARK7_PATT_NAME	"Data\\patt.hole3"		// パターンファイル名
+#define MARK7_PATT_NAME	"Data\\patt.exit"		// パターンファイル名
 #define MARK7_SIZE		60.0					// パターンの幅（40mm）
 //-----
 #define MARK8_MARK_ID	8						// マーカーID
-#define MARK8_PATT_NAME	"Data\\patt.no1"		// パターンファイル名
+#define MARK8_PATT_NAME	"Data\\patt.kasoku"		// パターンファイル名
 #define MARK8_SIZE		60.0		
 //----- 
 #define MARK9_MARK_ID   9						// マーカーID
-#define MARK9_PATT_NAME	"Data\\patt.no2"		// パターンファイル名
+#define MARK9_PATT_NAME	"Data\\patt.kasoku"		// パターンファイル名
 #define MARK9_SIZE		60.0		
+
+#define MARK10_MARK_ID   10						// マーカーID
+#define MARK10_PATT_NAME	"Data\\patt.gensoku"		// パターンファイル名
+#define MARK10_SIZE		60.0		
 //-----
 
 typedef struct {
@@ -245,8 +249,8 @@ void display(void)
 	double x = real(gsimulator.circle.p);
 	double y = imag(gsimulator.circle.p);
 	homography(x, y);
-	x = x/640. - 1.;
-	y = y/400. - 1.;
+	x = x/683. - 1.;
+	y = y/384. - 1.;
 
 
 	glDisable(GL_TEXTURE_2D);
@@ -256,8 +260,8 @@ void display(void)
 	if (gsimulator.ballIsMoving) {
 		glBegin(GL_POLYGON);
 		for (int i = 0; i < 32; i++) {
-			double X = x+gsimulator.circle.r/1280*2*std::cos(2*M_PI*i/32);
-			double Y = -(y+gsimulator.circle.r/800*2*std::sin(2*M_PI*i/32));
+			double X = x+gsimulator.circle.r/1366*2*std::cos(2*M_PI*i/32);
+			double Y = -(y+gsimulator.circle.r/768*2*std::sin(2*M_PI*i/32));
 			//convert(X, Y);
 			glVertex2d(X, Y);
 		}
