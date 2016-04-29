@@ -8,7 +8,6 @@
 using namespace std;
 
 const int dx[4] = {1, 0, -1, 0};
-//hoge
 const int dy[4] = {0, -1, 0, 1};
 
 // 減衰項
@@ -16,9 +15,9 @@ const Real damp = 5;
 // 矢印パネルでの加速項
 const Real cdAccel = 1000;
 // フィールドの幅
-const Real width = 950;
+const Real width = 782;
 // フィールドの高さ
-const Real height = 534;
+const Real height = 530;
 
 //ボールの半径
 const Real radius = 25;
@@ -120,7 +119,15 @@ void physSimu::simulate(const Field& field, Real t) {
 				// 単純に向きを変えるだけ
 				//v = abs(v) * (board.position[(4-board.dir)%4] - board.position[(7-board.dir)%4]) /  abs(board.position[0] - board.position[1]);
 			}
-		} else if(id == Field::Board::HOLE){
+		} else if (id == Field::Board::ACCELERATION){
+            if (contains(board.position, circle.p) == GEOMETRY_IN){
+             v *= 1.1;
+            }
+        } else if (id == Field::Board::DECELERATION){
+            if (contains(board.position, circle.p) == GEOMETRY_IN){
+             v *= 0.9;
+            }
+        } else if(id == Field::Board::HOLE){
 			if (contains(board.position, circle.p) == GEOMETRY_IN) {
 				//落ちたらボール消える
 				fallIntoHole(field);
@@ -128,14 +135,14 @@ void physSimu::simulate(const Field& field, Real t) {
 		} else if(id == Field::Board::GOAL){
 			if (contains(board.position, circle.p) == GEOMETRY_IN) {
 				//ゴールに到達
-				arrivedAtGoal(field,t);
+				arrivedAtGoal(field);
 			}
 		}
 	}
 	// 任意のシミュレーションで行う処理:摩擦を受けて速度を微減させる
 	Real length = abs(v);
 	if (eq(length, 0)) return;
-	//v *= 0.998;
+	v *= 0.998;
 }
 
 void physSimu::shootBall(const Field& field, const Real& startV){
@@ -169,10 +176,10 @@ void physSimu::fallIntoHole(const Field& field){
 	ballIsOver = true;
 }
 
-void physSimu::arrivedAtGoal(const Field& field,Real t){
+void physSimu::arrivedAtGoal(const Field& field){
 	v = 0;
 	ballIsMoving = false;
-	std::cout << "GOAL!!!!!YOUR SCORE IS " << t << "SECOND!!!" << std::endl;
+	std::cout << "GOAL!!!!!" << std::endl;
 	ballIsClear = true;
 }
 
