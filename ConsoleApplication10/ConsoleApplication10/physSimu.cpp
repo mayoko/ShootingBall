@@ -119,7 +119,15 @@ void physSimu::simulate(const Field& field, Real t) {
 				// ’Pƒ‚ÉŒü‚«‚ğ•Ï‚¦‚é‚¾‚¯
 				//v = abs(v) * (board.position[(4-board.dir)%4] - board.position[(7-board.dir)%4]) /  abs(board.position[0] - board.position[1]);
 			}
-		} else if(id == Field::Board::HOLE){
+		} else if (id == Field::Board::ACCELERATION){
+            if (contains(board.position, circle.p) == GEOMETRY_IN){
+             v *= 1.1;
+            }
+        } else if (id == Field::Board::DECELERATION){
+            if (contains(board.position, circle.p) == GEOMETRY_IN){
+             v *= 0.9;
+            }
+        } else if(id == Field::Board::HOLE){
 			if (contains(board.position, circle.p) == GEOMETRY_IN) {
 				//—‚¿‚½‚çƒ{[ƒ‹Á‚¦‚é
 				fallIntoHole(field);
