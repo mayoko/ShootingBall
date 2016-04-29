@@ -5,7 +5,6 @@
 *************************************************************************************/
 
 #pragma warning(disable:4819)
-
 #include "field.h"
 #include "physSimu.h"
 #include "Mat.h"
