@@ -132,6 +132,13 @@ void physSimu::simulate(const Field& field, Real t) {
 				//落ちたらボール消える
 				fallIntoHole(field);
 			}
+        } else if(id == Field::Board::BLACKHOLE){
+			if (contains(board.position, circle.p) == GEOMETRY_IN) {
+				//落ちたらボール消える
+				Real startV = abs(v);
+				fallIntoBlackHole(field);
+				shootFromWhiteHole(field, startV);
+			}
 		} else if(id == Field::Board::GOAL){
 			if (contains(board.position, circle.p) == GEOMETRY_IN) {
 				//ゴールに到達
@@ -175,6 +182,37 @@ void physSimu::fallIntoHole(const Field& field){
 	std::cout << "GAME OVER..." << std::endl;
 	ballIsOver = true;
 }
+void physSimu::fallIntoBlackHole(const Field& field){
+	ballIsMoving = false;
+	ballIsOver = true;
+}
+void physSimu::shootFromWhiteHole(const Field& field,const Real& startV){
+	cout << "shoot Ball" << endl;
+	// firldにおかれている各オブジェクトのなかでスタート用パネルを探し、処理する
+	int n = field.boards.size();
+	for (Field::Board board : field.boards) {
+		int id = board.id;
+		cout << id << endl;
+		if (id == Field::Board::WHITEHOLE) {
+			cout << "detect START" << endl;
+			//4頂点の重心が中心座標
+			Pt ballStartPos = (board.position[0] +board.position[1] +board.position[2] +board.position[3]) / 4.0;
+			Cir ball(ballStartPos,radius);
+			circle = ball;
+			//マーカの縦方向でのワールド座標系での単位ベクトルに初期速さをかけて初期速度に
+			//(4-board.dir)%4で常に左上になるらしい。そして順番は時計回りらしい。
+			v = (board.position[(3-board.dir)%4] - board.position[(3-board.dir+3)%4]) /  abs(board.position[0] - board.position[1]) * startV;
+		}
+	}
+	t = 0;
+	ballIsMoving = true;
+	ballIsOver = false;
+	ballIsClear = false;
+}
+
+
+
+
 
 void physSimu::arrivedAtGoal(const Field& field){
 	v = 0;

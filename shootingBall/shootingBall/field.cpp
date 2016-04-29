@@ -27,6 +27,19 @@ void Field::Board::print() const {
 	case HOLE:
 		cout << "HOLE" << endl;
 		break;
+	case BLACKHOLE:
+		cout << "BLACKHOLE" << endl;
+		break;
+	case WHITEHOLE:
+		cout << "WHITEHOLE" << endl;
+		break;
+	case ACCELERATION:
+        cout << "ACCELERATION" << endl;
+    break;
+    case DECELERATION:
+        cout << "DECELERATION" << endl;
+    break;
+
 	default:
 		cout << "NONE" << endl;
 		break;
