@@ -24,7 +24,11 @@ public:
 			START = 2,
 			GOAL =  3,
 			HOLE = 4,
-			EFFECT_NUM,
+			BLACKHOLE = 5,
+			WHITEHOLE = 6,
+			EFFECT_NUM = 7,
+			ACCELERATION = 8,
+			DECELERATION = 9,
 		};
 		// 何のボードか(いまのところ障害物と方向変換のみ)
 		// 上で定義したenumで管理する

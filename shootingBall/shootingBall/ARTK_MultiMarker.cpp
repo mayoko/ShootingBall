@@ -1,3 +1,4 @@
+
 /**************************************--仕様--***************************************
 ■説明
 マーカ「Hiro」「Sample1」「Kanji」を認識して別のオブジェクトを表示させるプログラム
@@ -5,6 +6,7 @@
 *************************************************************************************/
 
 #pragma warning(disable:4819)
+
 #include "field.h"
 #include "physSimu.h"
 #include "Mat.h"
@@ -41,8 +43,8 @@ int  count = 0;										// 処理フレーム数
 int startFlag = 0;                                  // スタートフラグ
 int winID[2];                                       // ウィンドウのID
 double gstartV;                                        // 初期速度
-const int width = 1366;
-const int height = 768;
+const int width = 1280;
+const int height = 800;
 Mat H_pc;
 double H_pw[9];
 bool Change = false;
@@ -62,7 +64,7 @@ ARParam cparam;										// カメラパラメータ
 
 /* パターンファイル */
 /*! パターンファイルはFieldクラスに定義されている順番に定義すること !*/
-#define MARK_NUM		7					// 使用するマーカーの種類
+#define MARK_NUM		9					// 使用するマーカーの種類
 //-----
 #define MARK1_MARK_ID	1						// マーカーID
 #define MARK1_PATT_NAME	"Data\\patt.wall"		// パターンファイル名
@@ -92,6 +94,14 @@ ARParam cparam;										// カメラパラメータ
 #define MARK7_PATT_NAME	"Data\\patt.hole3"		// パターンファイル名
 #define MARK7_SIZE		60.0					// パターンの幅（40mm）
 //-----
+#define MARK8_MARK_ID	8						// マーカーID
+#define MARK8_PATT_NAME	"Data\\patt.no1"		// パターンファイル名
+#define MARK8_SIZE		60.0		
+//----- 
+#define MARK9_MARK_ID   9						// マーカーID
+#define MARK9_PATT_NAME	"Data\\patt.no2"		// パターンファイル名
+#define MARK9_SIZE		60.0		
+//-----
 
 typedef struct {
 	char   *patt_name;			// パターンファイル
@@ -110,7 +120,9 @@ MARK_T   marker[MARK_NUM] = {
 	{MARK4_PATT_NAME, -1, MARK4_MARK_ID, 0, MARK4_SIZE, {0.0, 0.0}},
 	{MARK5_PATT_NAME, -1, MARK5_MARK_ID, 0, MARK5_SIZE, {0.0, 0.0}},
 	{MARK6_PATT_NAME, -1, MARK6_MARK_ID, 0, MARK6_SIZE, {0.0, 0.0}},
-	{MARK7_PATT_NAME, -1, MARK7_MARK_ID, 0, MARK7_SIZE, {0.0, 0.0}}
+	{MARK7_PATT_NAME, -1, MARK7_MARK_ID, 0, MARK7_SIZE, {0.0, 0.0}},
+	{MARK8_PATT_NAME, -1, MARK8_MARK_ID, 0, MARK8_SIZE, {0.0, 0.0}},
+	{MARK9_PATT_NAME, -1, MARK9_MARK_ID, 0, MARK9_SIZE, {0.0, 0.0}}
 };
 
 // プロトタイプ宣言
@@ -145,6 +157,8 @@ int main( int argc, char **argv )
 	// メインループの開始
 	argMainLoop( MouseEvent, KeyEvent, MainLoop );
 
+	fflush(stdin);
+	getchar();
 	return 0;
 }
 
@@ -177,7 +191,7 @@ void fullscreen(){
 		glClearColor( 0.0f, 1.0f, 0.0f, 1.0f );
 		ChangeDisplaySettings(NULL, 0);
 		glutPositionWindow(100,100);
-		glutReshapeWindow(1366,768);
+		glutReshapeWindow(1280,800);
 	}
 }
 
@@ -228,15 +242,11 @@ void display(void)
 	//const double x = real(gsimulator.circle.p)/782*2-1.;
 	//const double y = imag(gsimulator.circle.p)/530*2-1.;
 	
-	// world
 	double x = real(gsimulator.circle.p);
 	double y = imag(gsimulator.circle.p);
-	// world -> projector に変換
 	homography(x, y);
 	x = x/640. - 1.;
 	y = y/400. - 1.;
-	std::cout<<"x="<<x<<","<<"y="<<y<<std::endl;
-
 
 
 	glDisable(GL_TEXTURE_2D);
@@ -246,15 +256,12 @@ void display(void)
 	if (gsimulator.ballIsMoving) {
 		glBegin(GL_POLYGON);
 		for (int i = 0; i < 32; i++) {
-			//double X = gsimulator.circle.r/1280*2*std::cos(2*M_PI*i/32);
-			//double Y = 1-(gsimulator.circle.r/800*2*std::sin(2*M_PI*i/32));
-			double X = x+gsimulator.circle.r/1366*2*std::cos(2*M_PI*i/32);
-			double Y = -(y+gsimulator.circle.r/768*2*std::sin(2*M_PI*i/32));
+			double X = x+gsimulator.circle.r/1280*2*std::cos(2*M_PI*i/32);
+			double Y = -(y+gsimulator.circle.r/800*2*std::sin(2*M_PI*i/32));
 			//convert(X, Y);
 			glVertex2d(X, Y);
 		}
 		glEnd();
-
 	}
 	//for (Field::Board board : gfield.boards) {
 	//	switch(board.id) {
@@ -277,6 +284,14 @@ void display(void)
 	//	case Field::Board::GOAL:
 	//		// 水色
 	//		glColor3d(0, 1.0, 1.0);
+	//		break;
+	//  case Field::Board::BLACKHOLE:
+	//		// 水色
+	//		glColor3d();
+	//		break;
+    //  case Field::Board::WHITEHOLE:
+	//		// 水色
+	//		glColor3d();
 	//		break;
 	//	default:
 	//		std::cout << "unko" << std::endl;
@@ -354,6 +369,8 @@ void Init(void)
 		if( (marker[i].patt_id = arLoadPatt(marker[i].patt_name)) < 0){
 			printf("パターンファイルの読み込みに失敗しました\n");
 			printf("%s\n", marker[i].patt_name);
+			fflush(stdin);
+			getchar();
 			exit(0);
 		}
 		gfield.trans.insert(std::pair<int, int>(marker[i].patt_id, i));

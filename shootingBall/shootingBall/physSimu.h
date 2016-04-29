@@ -24,8 +24,12 @@ public:
 	bool ballIsOver;
 	//穴に落ちたらボールを消す処理
 	void fallIntoHole(const Field&);
+	//ブラックホールに落ちたらボールを消す処理
+	void fallIntoBlackHole(const Field&);
+	//ホワイトホールからボールが出てくる処理
+	void shootFromWhiteHole(const Field& field, const Real& startV);
 	//ゴール処理
-	void arrivedAtGoal(const Field&,Real t);
+	void arrivedAtGoal(const Field&);
 	// ボールの運動を記述する(デバッグ用)
 	void print() const ;
 };
