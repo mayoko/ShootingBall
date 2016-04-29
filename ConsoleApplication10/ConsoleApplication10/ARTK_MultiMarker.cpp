@@ -63,7 +63,7 @@ ARParam cparam;										// カメラパラメータ
 
 /* パターンファイル */
 /*! パターンファイルはFieldクラスに定義されている順番に定義すること !*/
-#define MARK_NUM		5					// 使用するマーカーの種類
+#define MARK_NUM		7					// 使用するマーカーの種類
 //-----
 #define MARK1_MARK_ID	1						// マーカーID
 #define MARK1_PATT_NAME	"Data\\patt.wall"		// パターンファイル名
@@ -85,6 +85,14 @@ ARParam cparam;										// カメラパラメータ
 #define MARK5_PATT_NAME	"Data\\patt.hole"		// パターンファイル名
 #define MARK5_SIZE		60.0					// パターンの幅（40mm）
 //-----
+#define MARK6_MARK_ID	6						// マーカーID
+#define MARK6_PATT_NAME	"Data\\patt.hole2"		// パターンファイル名
+#define MARK6_SIZE		60.0					// パターンの幅（40mm）
+//-----
+#define MARK7_MARK_ID	7						// マーカーID
+#define MARK7_PATT_NAME	"Data\\patt.hole3"		// パターンファイル名
+#define MARK7_SIZE		60.0					// パターンの幅（40mm）
+//-----
 
 typedef struct {
 	char   *patt_name;			// パターンファイル
@@ -101,7 +109,9 @@ MARK_T   marker[MARK_NUM] = {
 	{MARK2_PATT_NAME, -1, MARK2_MARK_ID, 0, MARK2_SIZE, {0.0, 0.0}},
 	{MARK3_PATT_NAME, -1, MARK3_MARK_ID, 0, MARK3_SIZE, {0.0, 0.0}},
 	{MARK4_PATT_NAME, -1, MARK4_MARK_ID, 0, MARK4_SIZE, {0.0, 0.0}},
-	{MARK5_PATT_NAME, -1, MARK5_MARK_ID, 0, MARK5_SIZE, {0.0, 0.0}}
+	{MARK5_PATT_NAME, -1, MARK5_MARK_ID, 0, MARK5_SIZE, {0.0, 0.0}},
+	{MARK6_PATT_NAME, -1, MARK6_MARK_ID, 0, MARK6_SIZE, {0.0, 0.0}},
+	{MARK7_PATT_NAME, -1, MARK7_MARK_ID, 0, MARK7_SIZE, {0.0, 0.0}}
 };
 
 // プロトタイプ宣言
