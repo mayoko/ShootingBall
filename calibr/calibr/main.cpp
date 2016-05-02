@@ -112,9 +112,9 @@ for(int j=0;j<2;++j){
  //H_wc‚Ì‚Æ‚«
  if(j==0){
  after[j].push_back(cv::Point(0,0));
- after[j].push_back(cv::Point(0,534));
- after[j].push_back(cv::Point(950,534));
- after[j].push_back(cv::Point(950,0));
+ after[j].push_back(cv::Point(0,520));
+ after[j].push_back(cv::Point(640,520));
+ after[j].push_back(cv::Point(640,0));
  }
 //
 

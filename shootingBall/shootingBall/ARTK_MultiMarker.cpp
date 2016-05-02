@@ -67,7 +67,7 @@ ARParam cparam;										// カメラパラメータ
 #define MARK_NUM		9					// 使用するマーカーの種類
 //-----
 #define MARK1_MARK_ID	1						// マーカーID
-#define MARK1_PATT_NAME	"Data\\patt.wall"		// パターンファイル名
+#define MARK1_PATT_NAME	"Data\\patt.hiro"		// パターンファイル名
 #define MARK1_SIZE		60.0					// パターンの幅（40mm）
 //-----
 #define MARK2_MARK_ID	2						// マーカーID
@@ -82,9 +82,12 @@ ARParam cparam;										// カメラパラメータ
 #define MARK4_PATT_NAME	"Data\\patt.goal"		// パターンファイル名
 #define MARK4_SIZE		60.0					// パターンの幅（40mm）
 //-----
-#define MARK5_MARK_ID	5						// マーカーID
-#define MARK5_PATT_NAME	"Data\\patt.start"		// パターンファイル名
-#define MARK5_SIZE		60.0					// パターンの幅（40mm）
+
+#define MARK5_MARK_ID	5				// マーカーID
+#define MARK5_PATT_NAME	"Data\\patt.hiro"		// パターンファイル名
+#define MARK5_SIZE		60.0	
+
+// パターンの幅（40mm）
 //-----
 #define MARK6_MARK_ID	6						// マーカーID
 #define MARK6_PATT_NAME	"Data\\patt.hole"		// パターンファイル名
@@ -94,13 +97,16 @@ ARParam cparam;										// カメラパラメータ
 #define MARK7_PATT_NAME	"Data\\patt.exit"		// パターンファイル名
 #define MARK7_SIZE		60.0					// パターンの幅（40mm）
 //-----
+
 #define MARK8_MARK_ID	8						// マーカーID
-#define MARK8_PATT_NAME	"Data\\patt.kasoku"		// パターンファイル名
+#define MARK8_PATT_NAME	"Data\\patt.star"		// パターンファイル名
 #define MARK8_SIZE		60.0		
+
 //----- 
 #define MARK9_MARK_ID   9						// マーカーID
-#define MARK9_PATT_NAME	"Data\\patt.kasoku"		// パターンファイル名
+#define MARK9_PATT_NAME	"Data\\patt.accela"		// パターンファイル名
 #define MARK9_SIZE		60.0		
+
 
 #define MARK10_MARK_ID   10						// マーカーID
 #define MARK10_PATT_NAME	"Data\\patt.gensoku"		// パターンファイル名

@@ -15,10 +15,11 @@ const Real damp = 5;
 // 矢印パネルでの加速項
 const Real cdAccel = 1000;
 // フィールドの幅
-const Real width = 950;
+//const Real width = 950;
+const Real width = 640;
 // フィールドの高さ
-const Real height = 534;
-
+//const Real height = 534;
+const Real height = 520;
 //ボールの半径
 const Real radius = 25;
 
