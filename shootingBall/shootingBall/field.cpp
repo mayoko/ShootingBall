@@ -12,9 +12,10 @@ using namespace std;
 void Field::Board::print() const {
 	cout << "id is " << id << endl;
 	switch(id) {
-	case OBSTACLE:
+	/*case OBSTACLE:
 		cout << "OBSTACLE" << endl;
 		break;
+	*/
 	case CHANGE_DIRECTION:
 		cout << "CHANGE_DIRECTION" << endl;
 		break;
@@ -24,9 +25,10 @@ void Field::Board::print() const {
 	case GOAL:
 		cout << "GOAL" << endl;
 		break;
-	case HOLE:
+	/*case HOLE:
 		cout << "HOLE" << endl;
 		break;
+	*/
 	case BLACKHOLE:
 		cout << "BLACKHOLE" << endl;
 		break;

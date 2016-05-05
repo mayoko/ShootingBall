@@ -15,11 +15,11 @@ const Real damp = 5;
 // 矢印パネルでの加速項
 const Real cdAccel = 1000;
 // フィールドの幅
-//const Real width = 950;
-const Real width = 640;
+const Real width = 950;
+//const Real width = 640;
 // フィールドの高さ
-//const Real height = 534;
-const Real height = 520;
+const Real height = 534;
+//const Real height = 520;
 //ボールの半径
 const Real radius = 25;
 
@@ -84,35 +84,37 @@ void physSimu::simulate(const Field& field, Real t) {
 	int n = field.boards.size();
 	for (Field::Board board : field.boards) {
 		int id = board.id;
-		if (id == Field::Board::OBSTACLE) {
-			// 円と直線が交わっていたら跳ね返る
-			//! 頂点が時計回り,または反時計回りに並んでいることを前提としている
-			for (int i = 0; i < 4; i++) {
-				bool flag = false;
-				Line l;
-				l.first = board.position[i];
-				l.second = board.position[(i+1)%4];
-				if (circle.r + 0.01 > LPdist(l, circle.p)) {
-					{
-						Pt V = vertical(l);
-						Pt a = circle.p - l.first;
-						if (dot(V, a) * dot(V, v) > 0) continue;
-					}
-					vector<Pt> intersect = circle_line_intersect(l, circle);
-					for (Pt p : intersect) {
-						if (eq(0, SPdist(l, p))) {
-							flag = true;
-							break;
-						}
-					}
-				}
-				if (flag) {
-					// ボールが直線にぶつかったとき跳ね返る処理
-					v = reflection(v, l);
-					break;
-				}
-			}\
-		} else if (id == Field::Board::CHANGE_DIRECTION) {
+		//if (id == Field::Board::OBSTACLE) {
+		//	// 円と直線が交わっていたら跳ね返る
+		//	//! 頂点が時計回り,または反時計回りに並んでいることを前提としている
+		//	for (int i = 0; i < 4; i++) {
+		//		bool flag = false;
+		//		Line l;
+		//		l.first = board.position[i];
+		//		l.second = board.position[(i+1)%4];
+		//		if (circle.r + 0.01 > LPdist(l, circle.p)) {
+		//			{
+		//				Pt V = vertical(l);
+		//				Pt a = circle.p - l.first;
+		//				if (dot(V, a) * dot(V, v) > 0) continue;
+		//			}
+		//			vector<Pt> intersect = circle_line_intersect(l, circle);
+		//			for (Pt p : intersect) {
+		//				if (eq(0, SPdist(l, p))) {
+		//					flag = true;
+		//					break;
+		//				}
+		//			}
+		//		}
+		//		if (flag) {
+		//			// ボールが直線にぶつかったとき跳ね返る処理
+		//			v = reflection(v, l);
+		//			break;
+		//		}
+		//	}\
+		//} else
+		if (id == Field::Board::CHANGE_DIRECTION) {
+			
 			if (contains(board.position, circle.p) == GEOMETRY_IN) {
 				// 矢印の向きに応じて速度を変化させる
 
@@ -122,18 +124,20 @@ void physSimu::simulate(const Field& field, Real t) {
 			}
 		} else if (id == Field::Board::ACCELERATION){
             if (contains(board.position, circle.p) == GEOMETRY_IN){
-             v *= 1.1;
+             v *= 1.05;
             }
         } else if (id == Field::Board::DECELERATION){
             if (contains(board.position, circle.p) == GEOMETRY_IN){
              v *= 0.9;
             }
-        } else if(id == Field::Board::HOLE){
-			if (contains(board.position, circle.p) == GEOMETRY_IN) {
-				//落ちたらボール消える
-				fallIntoHole(field);
-			}
-        } else if(id == Field::Board::BLACKHOLE){
+        } 
+		//else if(id == Field::Board::HOLE){
+		//	if (contains(board.position, circle.p) == GEOMETRY_IN) {
+		//		//落ちたらボール消える
+		//		fallIntoHole(field);
+		//	}
+  //      }
+		else if(id == Field::Board::BLACKHOLE){
 			if (contains(board.position, circle.p) == GEOMETRY_IN) {
 				//落ちたらボール消える
 				Real startV = abs(v);

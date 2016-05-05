@@ -64,14 +64,14 @@ ARParam cparam;										// カメラパラメータ
 
 /* パターンファイル */
 /*! パターンファイルはFieldクラスに定義されている順番に定義すること !*/
-#define MARK_NUM		9					// 使用するマーカーの種類
+#define MARK_NUM		10					// 使用するマーカーの種類
 //-----
 #define MARK1_MARK_ID	1						// マーカーID
-#define MARK1_PATT_NAME	"Data\\patt.hiro"		// パターンファイル名
+#define MARK1_PATT_NAME	"Data\\patt.wall"		// パターンファイル名
 #define MARK1_SIZE		60.0					// パターンの幅（40mm）
 //-----
 #define MARK2_MARK_ID	2						// マーカーID
-#define MARK2_PATT_NAME	"Data\\patt.arrow "	// パターンファイル名
+#define MARK2_PATT_NAME	"Data\\patt.arrow "	// or patt.arrow
 #define MARK2_SIZE		60.0					// パターンの幅（40mm）
 //-----
 #define MARK3_MARK_ID	3						// マーカーID
@@ -84,7 +84,7 @@ ARParam cparam;										// カメラパラメータ
 //-----
 
 #define MARK5_MARK_ID	5				// マーカーID
-#define MARK5_PATT_NAME	"Data\\patt.hiro"		// パターンファイル名
+#define MARK5_PATT_NAME	"Data\\patt.no1"		// パターンファイル名
 #define MARK5_SIZE		60.0	
 
 // パターンの幅（40mm）
@@ -104,12 +104,12 @@ ARParam cparam;										// カメラパラメータ
 
 //----- 
 #define MARK9_MARK_ID   9						// マーカーID
-#define MARK9_PATT_NAME	"Data\\patt.accela"		// パターンファイル名
+#define MARK9_PATT_NAME	"Data\\patt.kasoku"		// パターンファイル名
 #define MARK9_SIZE		60.0		
 
 
 #define MARK10_MARK_ID   10						// マーカーID
-#define MARK10_PATT_NAME	"Data\\patt.gensoku"		// パターンファイル名
+#define MARK10_PATT_NAME	"Data\\patt.decer"		// パターンファイル名
 #define MARK10_SIZE		60.0		
 //-----
 
@@ -132,7 +132,8 @@ MARK_T   marker[MARK_NUM] = {
 	{MARK6_PATT_NAME, -1, MARK6_MARK_ID, 0, MARK6_SIZE, {0.0, 0.0}},
 	{MARK7_PATT_NAME, -1, MARK7_MARK_ID, 0, MARK7_SIZE, {0.0, 0.0}},
 	{MARK8_PATT_NAME, -1, MARK8_MARK_ID, 0, MARK8_SIZE, {0.0, 0.0}},
-	{MARK9_PATT_NAME, -1, MARK9_MARK_ID, 0, MARK9_SIZE, {0.0, 0.0}}
+	{MARK9_PATT_NAME, -1, MARK9_MARK_ID, 0, MARK9_SIZE, {0.0, 0.0}},
+	{MARK10_PATT_NAME, -1, MARK10_MARK_ID, 0, MARK10_SIZE, {0.0, 0.0}}
 };
 
 // プロトタイプ宣言
@@ -201,7 +202,7 @@ void fullscreen(){
 		glClearColor( 0.0f, 1.0f, 0.0f, 1.0f );
 		ChangeDisplaySettings(NULL, 0);
 		glutPositionWindow(100,100);
-		glutReshapeWindow(1280,800);
+		glutReshapeWindow(1366,768);
 	}
 }
 
