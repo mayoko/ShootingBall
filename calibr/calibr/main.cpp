@@ -112,9 +112,9 @@ for(int j=0;j<2;++j){
  //H_wc‚Ì‚Æ‚«
  if(j==0){
  after[j].push_back(cv::Point(0,0));
- after[j].push_back(cv::Point(0,530));
- after[j].push_back(cv::Point(950,530));
- after[j].push_back(cv::Point(950,0));
+ after[j].push_back(cv::Point(0,580));
+ after[j].push_back(cv::Point(1010,580));
+ after[j].push_back(cv::Point(1010,0));
  }
 //
 
@@ -141,7 +141,8 @@ for(int j=0;j<2;++j){
 	Mat H_wc(3,3,CV_64FC1);
 	ifstream ifs("../../shootingBall/shootingBall/Data/H_wc.txt");
 	for (int p = 0; p < 3; p++) for (int q = 0; q < 3; q++) ifs >> H_wc.at<double>(p,q);
-	H_pw = H[1] * H_wc.inv();
+	solve(H_wc.t(),H[1].t(),H_pw);
+	transpose(H_pw,H_pw);
     ofstream ofs1( "../../shootingBall/shootingBall/Data/H_pw.txt"); 
 	ofs1 << H_pw.at<double>(0,0) <<"\t"<< H_pw.at<double>(0,1) <<"\t"<< H_pw.at<double>(0,2) << std::endl;
 	ofs1 << H_pw.at<double>(1,0) <<"\t"<< H_pw.at<double>(1,1) <<"\t"<< H_pw.at<double>(1,2) << std::endl;
@@ -182,7 +183,7 @@ Point2d tyuuten[4];
 	H_pw = H[1] * H[0].inv();
     ofstream ofs( "H_pw.txt"); 
 	ofs << H_pw.at<double>(0,0) <<"\t"<< H_pw.at<double>(0,1) <<"\t"<< H_pw.at<double>(0,2) << std::endl;
-	ofs << H_pw.at<double>(1,0) <<"\t"<< H_pw.at<double>(1,1) <<"\t"<< H_pw.at<double>(1,2) << std::endl;
+	ofs << H_pw.at<double>(1,0) </<"\t"<< H_pw.at<double>(1,1) <<"\t"<< H_pw.at<double>(1,2) << std::endl;
 	ofs << H_pw.at<double>(2,0) <<"\t"<< H_pw.at<double>(2,1) <<"\t"<< H_pw.at<double>(2,2) << std::endl;
 	cout <<"H_pw = "<<H_pw << std::endl;
 	
