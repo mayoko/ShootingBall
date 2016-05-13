@@ -9,6 +9,10 @@
 
 using namespace std;
 
+//ƒ{[ƒ‹ˆÊ’u•â³€
+const int dx=25;
+const int dy=110;
+
 void Field::Board::print() const {
 	cout << "id is " << id << endl;
 	switch(id) {
@@ -84,7 +88,7 @@ void Field::receiveData(int marker_num, ARMarkerInfo* marker_info) {
 			for (int i = 0; i < 2; i++) vec.mat[i][0] = marker_info[j].vertex[vertex_num][i];
 			vec.mat[2][0] = 1;
 			vec = mul(H_cw, vec);
-			new_board.position.emplace_back(vec.mat[0][0]/vec.mat[2][0],vec.mat[1][0]/vec.mat[2][0]+150);
+			new_board.position.emplace_back(vec.mat[0][0]/vec.mat[2][0]+dx,vec.mat[1][0]/vec.mat[2][0]+dy);
 		}
 		boards.push_back(new_board);
 	}

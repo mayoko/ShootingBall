@@ -51,6 +51,9 @@ void on_mouse( int e,int x, int y, int d, void* param)
 			}
 }
 
+//•ÒW‚·‚é‚Ì‚Í‚±‚±‚¾‚¯Awidth=‰¡Aheight=‚½‚Ä
+const int width=1042;
+const int height=578;
 
 int main(int argc, const char* argv[])
 {
@@ -112,18 +115,18 @@ for(int j=0;j<2;++j){
  //H_wc‚Ì‚Æ‚«
  if(j==0){
  after[j].push_back(cv::Point(0,0));
- after[j].push_back(cv::Point(0,580));
- after[j].push_back(cv::Point(1010,580));
- after[j].push_back(cv::Point(1010,0));
+ after[j].push_back(cv::Point(0,height));
+ after[j].push_back(cv::Point(width,height));
+ after[j].push_back(cv::Point(width,0));
  }
 //
 
  //H_pc‚Ì‚Æ‚«
  else if(j==1){
- after[j].push_back(cv::Point(100*1366/1280,100*768/800));
- after[j].push_back(cv::Point(100*1366/1280,700*768/800));
- after[j].push_back(cv::Point(1180*1366/1280,700*768/800));
- after[j].push_back(cv::Point(1180*1366/1280,100*768/800));
+ after[j].push_back(cv::Point(143,84));
+ after[j].push_back(cv::Point(143,684));
+ after[j].push_back(cv::Point(1223,684));
+ after[j].push_back(cv::Point(1223,84));
  }
  //
  

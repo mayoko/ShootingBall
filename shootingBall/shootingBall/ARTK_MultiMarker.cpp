@@ -99,7 +99,7 @@ ARParam cparam;										// カメラパラメータ
 //-----
 
 #define MARK8_MARK_ID	8						// マーカーID
-#define MARK8_PATT_NAME	"Data\\patt.kasoku"		// パターンファイル名
+#define MARK8_PATT_NAME	"Data\\patt.gensok"		// パターンファイル名
 #define MARK8_SIZE		60.0		
 
 //----- 
@@ -109,7 +109,7 @@ ARParam cparam;										// カメラパラメータ
 
 
 #define MARK10_MARK_ID   10						// マーカーID
-#define MARK10_PATT_NAME	"Data\\patt.decer"		// パターンファイル名
+#define MARK10_PATT_NAME	"Data\\patt.kasoku"		// パターンファイル名
 #define MARK10_SIZE		60.0		
 //-----
 

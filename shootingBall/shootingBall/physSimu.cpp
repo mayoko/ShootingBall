@@ -7,6 +7,9 @@
 
 using namespace std;
 
+//壁位置補正項
+const double ddy = -150;
+
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, -1, 0, 1};
 
@@ -15,11 +18,9 @@ const Real damp = 5;
 // 矢印パネルでの加速項
 const Real cdAccel = 1000;
 // フィールドの幅
-const Real width = 1010;
-//const Real width = 640;
+const Real width = 1042;
 // フィールドの高さ
-const Real height = 580;
-//const Real height = 520;
+const Real height = 578;
 //ボールの半径
 const Real radius = 25;
 
@@ -51,9 +52,10 @@ void physSimu::wallDetect() {
 			return;
 		}
 	}
-	if (imag(circle.p) + circle.r + 0.01 > height) {
+	
+	if (imag(circle.p) + circle.r + 0.01 > height+ddy) {
 		Line l;
-		l.first = Pt(0, height); l.second = Pt(width, height);
+		l.first = Pt(0, height+ddy); l.second = Pt(width, height+ddy);
 		Pt V = vertical(l);
 		Pt a = circle.p - l.first;
 		if (dot(V, a) * dot(V, v) < 0) {
@@ -61,9 +63,9 @@ void physSimu::wallDetect() {
 			return;
 		}
 	}
-	if (imag(circle.p) - circle.r - 0.01 < 0) {
+	if (imag(circle.p) - circle.r - 0.01 < 0+ddy) {
 		Line l;
-		l.first = Pt(0, 0); l.second = Pt(width, 0);
+		l.first = Pt(0, 0+ddy); l.second = Pt(width, 0+ddy);
 		Pt V = vertical(l);
 		Pt a = circle.p - l.first;
 		if (dot(V, a) * dot(V, v) < 0) {
